@@ -54,3 +54,11 @@ shows "Turbin3 Rug v2" and the new URI.
 `Finalized`. The run was from 16:54:22 to 16:58:05 UTC on 2026-11-05. The
 wallet balance went from 15.122411254 to 15.101588031 SOL, so the run cost
 0.020823223 SOL, with the Irys uploads.
+
+## [2026-11-06] step | README and X thread
+
+`README.md` lists the 6 signatures with explorer links. A script confirmed
+that each signature is `Finalized` and that each short label matches its full
+signature. The Q3 Irys links return HTTP 404 on 2026-11-06, so the README warns
+that Irys deletes devnet uploads after about 60 days. `docs/x-thread.md` has
+8 posts. A script checked that each post is under 280 characters.
