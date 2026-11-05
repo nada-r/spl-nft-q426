@@ -4,6 +4,10 @@ Turbin3 Builders Q4 2026, week 1 assignment. Scripts that mint and transfer an
 SPL token, mint an NFT with Metaplex Core, and update the NFT as the update
 authority. All transactions run on Solana devnet.
 
+<p align="center">
+  <img src="rug.png" width="200" alt="Turbin3 Rug, the image of the NFT">
+</p>
+
 ## Assignment
 
 1. Mint and transfer your own SPL token.
@@ -14,6 +18,40 @@ All three tasks are complete. The section [Results](#results) lists each
 transaction. The section [Proof on devnet](#proof-on-devnet) shows the test
 output and the program logs. The extension tasks (transfer and burn the NFT)
 are not part of this repo.
+
+## How it works
+
+```mermaid
+flowchart LR
+  subgraph spl["Task 1: SPL token"]
+    direction LR
+    meta["Metadata account<br/>Turbin3 Rug Token, RUGT"]
+    mint["Mint 7WAe...PTox<br/>6 decimals"]
+    wata["Wallet ATA<br/>90 tokens"]
+    rata["Recipient ATA<br/>10 tokens"]
+    meta -. describes .-> mint
+    mint -- "mintTo 100" --> wata
+    wata -- "transferChecked 10" --> rata
+  end
+  subgraph core["Tasks 2 and 3: MPL Core NFT"]
+    direction LR
+    asset["Asset 4bG5...nVf6<br/>owner, update authority,<br/>name, uri"]
+    json["Metadata JSON<br/>on Irys"]
+    png["rug.png<br/>on Irys"]
+    asset -- uri --> json
+    json -- image --> png
+  end
+```
+
+The wallet signs every transaction. It is the mint authority of the token. It
+is also the owner and the update authority of the asset.
+
+- **Task 1:** the token balances are in associated token accounts (ATAs), not
+  in the wallets. Each ATA belongs to one wallet and one mint.
+- **Task 2:** a Core asset is one account. It holds the owner, the update
+  authority, the name, and the URI of the metadata JSON.
+- **Task 3:** one `UpdateV2` instruction writes a new name and a new URI into
+  the asset account. Only the update authority can sign it.
 
 ## Results
 
@@ -66,7 +104,7 @@ from 2026-09-04 returned HTTP 404 on 2026-11-06.
 
 ## Proof on devnet
 
-### Tests
+### Test output
 
 `npm test` on 2026-11-06, with Node 25.2.1:
 
@@ -168,7 +206,8 @@ solana airdrop 2 <your wallet address> -ud
 
 ### 2. Dependencies
 
-The run used Node 25.2.1 and npm 11.6.2.
+You need Node 20.18 or later, because `@solana/kit` requires it. The run used
+Node 25.2.1 and npm 11.6.2.
 
 ```bash
 npm ci
@@ -187,6 +226,17 @@ scripts and the tests read it from there.
 `spl_init.ts` and `nft_mint.ts` stop if their value is already in
 `src/addresses.ts`. This prevents a second mint or a second asset by accident.
 Set `FORCE=1` to create a new one.
+
+### Run all the steps again with your wallet
+
+`src/addresses.ts` holds the values of my run. To start from zero:
+
+1. Set `WALLET` to the address of your wallet.
+2. Set `MINT`, `IMAGE_URI`, `METADATA_URI`, `ASSET`, and `NEW_METADATA_URI` to `""`.
+3. Optional: set `RECIPIENT` to another address.
+4. Run the scripts in the order of the two tables below.
+5. After each script, write the logged value in `src/addresses.ts`.
+6. Run `npm test`.
 
 ### SPL token
 
