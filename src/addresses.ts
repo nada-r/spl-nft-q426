@@ -9,7 +9,7 @@ export const WALLET = "6M3LySJ4D9y8PwwgeCMCs56MHAUa8ZJh3PYn5vmxGghE";
 export const RECIPIENT = "AEyXeEqQzru9rYhJ9k7QekMAMnEpdtnC4yAmHaUFZQQA";
 
 // Task 1: from spl_init.ts.
-export const MINT = "";
+export const MINT = "7WAetXWZ5vF5YqwVJGBbT3miXFWE6atVXyq9Ay9wPTox";
 
 // Task 2: from nft_image.ts, nft_metadata.ts, and nft_mint.ts.
 export const IMAGE_URI = "";
