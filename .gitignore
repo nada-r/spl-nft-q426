@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.DS_Store
+
+# Keypairs never go in git.
+*-wallet.json
+wallet.json
+*keypair*.json
+id.json
+
+.env
+.env.*
