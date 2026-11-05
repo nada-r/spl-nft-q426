@@ -14,7 +14,8 @@ import bs58 from "bs58";
 import { loadWallet, RPC_URL } from "../config";
 import { MINT, need } from "../addresses";
 
-const umi = createUmi(RPC_URL);
+// Reads and confirms use the same commitment, so a read after a send sees the new state.
+const umi = createUmi(RPC_URL, { commitment: "confirmed" });
 
 const keypair = umi.eddsa.createKeypairFromSecretKey(loadWallet());
 const signer = createSignerFromKeypair(umi, keypair);

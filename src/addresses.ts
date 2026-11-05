@@ -12,12 +12,12 @@ export const RECIPIENT = "AEyXeEqQzru9rYhJ9k7QekMAMnEpdtnC4yAmHaUFZQQA";
 export const MINT = "7WAetXWZ5vF5YqwVJGBbT3miXFWE6atVXyq9Ay9wPTox";
 
 // Task 2: from nft_image.ts, nft_metadata.ts, and nft_mint.ts.
-export const IMAGE_URI = "";
-export const METADATA_URI = "";
-export const ASSET = "";
+export const IMAGE_URI = "https://gateway.irys.xyz/3KMiNUfasFQShFBYHMscQ68hnZbC7JeShm5cYda8DVeZ";
+export const METADATA_URI = "https://gateway.irys.xyz/F4nATic5Zc2wiaTnZqLpc9gas1opnhujVrybeCZuUWDu";
+export const ASSET = "4bG5Lk9yXB7nBDS5bomL29YvivGwDxnSE7CDxU5pnVf6";
 
 // Task 3: from nft_update.ts.
-export const NEW_METADATA_URI = "";
+export const NEW_METADATA_URI = "https://gateway.irys.xyz/Fo9N47GYUvG7eUwoKqFZhzERoKsCaGF5NBM7TUQ9S8Tx";
 
 // Stops a script if a value from an earlier step is missing.
 export function need(name: string, value: string): string {

@@ -24,7 +24,9 @@ import {
 } from "../addresses";
 
 const rpc = createSolanaRpc(RPC_URL);
-const umi = createUmi(RPC_URL).use(mplTokenMetadata()).use(mplCore());
+const umi = createUmi(RPC_URL, { commitment: "confirmed" })
+  .use(mplTokenMetadata())
+  .use(mplCore());
 
 describe("Task 1: SPL token", () => {
   test("the mint has 6 decimals and the wallet is the mint authority", async () => {

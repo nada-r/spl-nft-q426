@@ -8,7 +8,8 @@ import { irysUploader } from "@metaplex-foundation/umi-uploader-irys";
 import { readFile } from "fs/promises";
 import { IRYS_URL, loadWallet, RPC_URL } from "../config";
 
-const umi = createUmi(RPC_URL);
+// Reads and confirms use the same commitment, so a read after a send sees the new state.
+const umi = createUmi(RPC_URL, { commitment: "confirmed" });
 
 const keypair = umi.eddsa.createKeypairFromSecretKey(loadWallet());
 const signer = createSignerFromKeypair(umi, keypair);

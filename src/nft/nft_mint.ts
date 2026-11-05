@@ -9,7 +9,8 @@ import { base58 } from "@metaplex-foundation/umi/serializers";
 import { loadWallet, RPC_URL } from "../config";
 import { ASSET, METADATA_URI, need } from "../addresses";
 
-const umi = createUmi(RPC_URL);
+// Reads and confirms use the same commitment, so a read after a send sees the new state.
+const umi = createUmi(RPC_URL, { commitment: "confirmed" });
 
 const keypair = umi.eddsa.createKeypairFromSecretKey(loadWallet());
 const signer = createSignerFromKeypair(umi, keypair);
