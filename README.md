@@ -23,24 +23,28 @@ are not part of this repo.
 
 ```mermaid
 flowchart LR
-  subgraph spl["Task 1: SPL token"]
-    direction LR
-    meta["Metadata account<br/>Turbin3 Rug Token, RUGT"]
-    mint["Mint 7WAe...PTox<br/>6 decimals"]
-    wata["Wallet ATA<br/>90 tokens"]
-    rata["Recipient ATA<br/>10 tokens"]
-    meta -. describes .-> mint
-    mint -- "mintTo 100" --> wata
-    wata -- "transferChecked 10" --> rata
-  end
-  subgraph core["Tasks 2 and 3: MPL Core NFT"]
-    direction LR
-    asset["Asset 4bG5...nVf6<br/>owner, update authority,<br/>name, uri"]
-    json["Metadata JSON<br/>on Irys"]
-    png["rug.png<br/>on Irys"]
-    asset -- uri --> json
-    json -- image --> png
-  end
+    wallet(["wallet 6M3L...GghE<br/>signs every transaction"])
+
+    subgraph task1["Task 1: SPL token"]
+        tmeta[("metadata account<br/>Turbin3 Rug Token, RUGT")]
+        tmint[("mint 7WAe...PTox<br/>6 decimals")]
+        wata[("wallet ATA<br/>90 tokens")]
+        rata[("recipient ATA<br/>10 tokens")]
+    end
+
+    subgraph task23["Tasks 2 and 3: MPL Core NFT"]
+        asset[("asset 4bG5...nVf6<br/>owner, update authority, name, uri")]
+        jsonfile["metadata JSON on Irys"]
+        pngfile["rug.png on Irys"]
+    end
+
+    wallet -->|"mint authority"| tmint
+    tmeta -.->|"describes"| tmint
+    tmint -->|"mintTo 100"| wata
+    wata -->|"transferChecked 10"| rata
+    wallet ==>|"owner and update authority, signs UpdateV2"| asset
+    asset -->|"uri"| jsonfile
+    jsonfile -->|"image"| pngfile
 ```
 
 The wallet signs every transaction. It is the mint authority of the token. It
